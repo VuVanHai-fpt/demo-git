@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Survey</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+            max-width: 800px;
+            width: 100%;
+            margin: 20px auto;
+        }
+        .header {
+            background-color: #cce4ff;
+            padding: 20px;
+            text-align: center;
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+        .video-container {
+            margin: 20px;
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+        }
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        .survey-container {
+            padding: 20px;
+        }
+        .survey-container textarea {
+            width: 100%;
+            height: 100px;
+            margin-top: 10px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            resize: none; /* Disable resizing */
+            box-sizing: border-box; /* Include padding and border in the element's total width and height */
+        }
+        .footer {
+            background-color: #cce4ff;
+            padding: 10px;
+            text-align: center;
+            font-size: 0.9em;
+        }
+        /* Add this to make the page scrollable */
+        html, body {
+            height: 100%;
+            overflow-y: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">影片觀後感問卷調查</div>
+        <div class="video-container">
+            <iframe src="https://www.youtube.com/embed/8yBRIxhZnnc" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+        <div class="survey-container">
+            <form id="surveyForm">
+                <fieldset>
+                    <legend>觀後感調查</legend>
+                    <label>看完影片後，對於背景的設計，你覺得？</label>
+                    <input type="radio" name="background" value="讚" onclick="updateText()"> 讚
+                    <input type="radio" name="background" value="還不錯" onclick="updateText()"> 還不錯
+                    <input type="radio" name="background" value="還可以" onclick="updateText()"> 還可以
+                    <input type="radio" name="background" value="SOSO" onclick="updateText()"> SOSO
+                    <input type="radio" name="background" value="爛透了" onclick="updateText()"> 爛透了<br><br>
+
+                    <label>看完影片後，對於人物的服裝，你覺得？</label>
+                    <input type="radio" name="costume" value="讚" onclick="updateText()"> 讚
+                    <input type="radio" name="costume" value="還不錯" onclick="updateText()"> 還不錯
+                    <input type="radio" name="costume" value="還可以" onclick="updateText()"> 還可以
+                    <input type="radio" name="costume" value="SOSO" onclick="updateText()"> SOSO
+                    <input type="radio" name="costume" value="爛透了" onclick="updateText()"> 爛透了<br><br>
+
+                    <label>看完影片後，對於音樂的選材，你覺得？</label>
+                    <input type="radio" name="music" value="讚" onclick="updateText()"> 讚
+                    <input type="radio" name="music" value="還不錯" onclick="updateText()"> 還不錯
+                    <input type="radio" name="music" value="還可以" onclick="updateText()"> 還可以
+                    <input type="radio" name="music" value="SOSO" onclick="updateText()"> SOSO
+                    <input type="radio" name="music" value="爛透了" onclick="updateText()"> 爛透了<br><br>
+
+                    <label>看完影片後，對於劇情的安排，你覺得？</label>
+                    <input type="radio" name="plot" value="讚" onclick="updateText()"> 讚
+                    <input type="radio" name="plot" value="還不錯" onclick="updateText()"> 還不錯
+                    <input type="radio" name="plot" value="還可以" onclick="updateText()"> 還可以
+                    <input type="radio" name="plot" value="SOSO" onclick="updateText()"> SOSO
+                    <input type="radio" name="plot" value="爛透了" onclick="updateText()"> 爛透了<br><br>
+
+                    <label>看完影片後，對於影片的流暢度，你覺得？</label>
+                    <input type="radio" name="flow" value="讚" onclick="updateText()"> 讚
+                    <input type="radio" name="flow" value="還不錯" onclick="updateText()"> 還不錯
+                    <input type="radio" name="flow" value="還可以" onclick="updateText()"> 還可以
+                    <input type="radio" name="flow" value="SOSO" onclick="updateText()"> SOSO
+                    <input type="radio" name="flow" value="爛透了" onclick="updateText()"> 爛透了<br><br>
+
+                    <label for="comments">感想</label><br>
+                    <textarea id="comments" placeholder="請在這裡輸入你的感想"></textarea><br><br>
+
+                    <input type="submit" value="送出">
+                    <input type="reset" value="取消">
+                </fieldset>
+            </form>
+        </div>
+        <div class="footer">Copyright © momoco</div>
+    </div>
+    <script>
+        function updateText() {
+            const form = document.getElementById('surveyForm');
+            const textArea = document.getElementById('comments');
+            const elements = form.elements;
+            let text = '';
+
+            for (let i = 0; i < elements.length; i++) {
+                if (elements[i].type === 'radio' && elements[i].checked) {
+                    text += elements[i].value + ' - ';
+                }
+            }
+
+            textArea.value = text.trim().slice(0, -2);  // Remove the trailing ' - '
+        }
+    </script>
+</body>
+</html>
